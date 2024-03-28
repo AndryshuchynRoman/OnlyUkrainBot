@@ -3,7 +3,7 @@ import logging
 
 from dotenv import load_dotenv
 from telegram import Update
-from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes,MessageHandler, filters
+from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes, MessageHandler, filters
 
 load_dotenv()
 
@@ -17,24 +17,41 @@ logging.basicConfig(
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await update.message.reply_text(f'Hello {update.effective_user.first_name}')
 
-async def hello (update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+
+async def hello(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await update.message.reply_text(f'хаю хай {update.effective_user.first_name}')
+
+
 async def HI(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await update.message.reply_text(f'віііііііі {update.effective_user.first_name}')
+
+async def author(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await context.bot.send_message(chat_id=update.effective_chat.id, text="Мене робив Андрущишин Роман ")
+
+
 async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-   messege = update.message.text.lower()
+    messege = update.message.text.lower()
 
-   if 'привіт' in messege:
-       reply_text = f'привіт {update.effective_user.first_name}!'
-   else:
-       reply_text = 'Я тебе не розумію '
+    if 'привіт' in messege:
+        reply_text = f'привіт {update.effective_user.first_name}!'
+    elif 'гудбай' in messege:
+        last_name = update.effective_user.last_name
+        if last_name is None:
+            reply_text = f'допобачення {update.effective_user.first_name}!'
+        else:
+            reply_text = f'допобачення {update.effective_user.first_name} {last_name}!'
+    else:
+        reply_text = 'Я тебе не розумію '
 
-   await update.message.reply_text(reply_text)
+    await update.message.reply_text(reply_text)
+
+
 app = ApplicationBuilder().token(TELEGRAM_TOKEN).build()
 
 app.add_handler(CommandHandler("start", start))
 app.add_handler(CommandHandler("hello", hello))
 app.add_handler(CommandHandler("HI", HI))
+app.add_handler(CommandHandler("author", author))
 app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, echo))
 
 app.run_polling()
