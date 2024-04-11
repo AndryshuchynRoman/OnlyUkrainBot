@@ -2,6 +2,6 @@ import os
 
 from dotenv import load_dotenv
 
-load_dotenv()  # take environment variables from .env.
+load_dotenv()  # take environment variables from ..env.
 
 TELEGRAM_TOKEN = os.getenv('TELEGRAM_TOKEN')
