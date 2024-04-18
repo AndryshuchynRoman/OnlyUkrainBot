@@ -14,12 +14,16 @@ class StartHandler(BaseHandler):
         keyboard = [
             [KeyboardButton('Share my location', request_location=True)],
             [KeyboardButton('Share my contact', request_contact=True)],
+            [KeyboardButton('/Bye',)],
+            [KeyboardButton('Boy',)],
+            [KeyboardButton('Girl',)],
         ]
+
 
         reply_markup = ReplyKeyboardMarkup(keyboard, one_time_keyboard=True)
 
         await context.bot.send_message(
             chat_id=update.effective_chat.id,
-            text="I'm a bot, please talk to me!",
+            text="привіт Роман і Вікторія!",
             reply_markup=reply_markup
         )
