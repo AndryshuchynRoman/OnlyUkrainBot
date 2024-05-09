@@ -1,1 +1,2 @@
-from .chose_your_own_adventure_conversation import AdventureHandler
+from .first_conversation_handler import FirstConversationHandler
+from .user_register_conversation_handler import UserRegisterConversationHandler

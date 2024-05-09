@@ -17,6 +17,7 @@ class StartHandler(BaseHandler):
             [KeyboardButton('/Bye',)],
             [KeyboardButton('Boy',)],
             [KeyboardButton('Girl',)],
+            [KeyboardButton('/user_register',)],
         ]
 
 
